@@ -38,18 +38,41 @@ def is_valid_email_address(s):
     
     split_address = s.split("@")
     
+    # First stop, check that there is only one @ in the address
+    # If there is more, or less, than one, return error.
     if(len(split_address)<2):
         return 1, "This address does not have any @ in it"
     elif(len(split_address)>2):
         return 1, "This address has more than one @ in it"
 
+    # We check that the pre-@ part of the address is composed of 3-6 alphanumeric characters
     if(len(split_address[0])<3):
         return 3, "The pre-@ part of this address has less than 3 characters"
     elif(len(split_address[0])>16):
         return 4, "The pre-@ part of this address has more than 16 characters"
+    elif(split_address[0].isalnum() == False):
+        return 5, "The pre-@ part of this address is not alphanumeric"
 
-    split_B = split_address.split(".")
-    
+    # We split the post-@ part into domain name and TLD
+    split_B = split_address[1].split(".")
+    # And we check there is only one .
+    if(len(split_B)<2):
+        return 6, "The post-@ part of this address does not have any . in it"
+    elif(len(split_B)>2):
+        return 7, "The post-@ part of this address has more than one . in it"
+
+    # We check the domain name is composed of 2-8 alphanumeric characters
+    if(len(split_B[0])<2):
+        return 8, "The domain name of this address has less than 2 characters"
+    elif(len(split_B[0])>8):
+        return 9, "The domain name of this address has more than 8 characters"
+    elif(split_B[0].isalnum() == False):
+        return 10, "The domain name of this address is not alphanumeric"
+
+    # And finally, we check the TLD is either com, edu, org, or gov.
+    if(split_B[1]!="com" or split_B[1]!="edu" or split_B[1]!="org" or split_B[1]!="gov"):
+        return 11, "The top-level domain of this address is not {com, edu, org, gov}"
+
     return None, "Seems legit"
 
 
