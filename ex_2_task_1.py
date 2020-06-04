@@ -36,7 +36,23 @@
 
 def is_valid_email_address(s):
     
-    # your code here
+    split_address = s.split("@")
+    
+    if(len(split_address)<2):
+        return 1, "This address does not have any @ in it"
+    elif(len(split_address)>2):
+        return 1, "This address has more than one @ in it"
+
+    if(len(split_address[0])<3):
+        return 3, "The pre-@ part of this address has less than 3 characters"
+    elif(len(split_address[0])>16):
+        return 4, "The pre-@ part of this address has more than 16 characters"
+
+    split_B = split_address.split(".")
+    
+    return None, "Seems legit"
+
+
 
     
 
