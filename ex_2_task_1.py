@@ -70,7 +70,7 @@ def is_valid_email_address(s):
         return 10, "The domain name of this address is not alphanumeric"
 
     # And finally, we check the TLD is either com, edu, org, or gov.
-    if(split_B[1]!="com" or split_B[1]!="edu" or split_B[1]!="org" or split_B[1]!="gov"):
+    if(split_B[1]!="com" and split_B[1]!="edu" and split_B[1]!="org" and split_B[1]!="gov"):
         return 11, "The top-level domain of this address is not {com, edu, org, gov}"
 
     return None, "Seems legit"
